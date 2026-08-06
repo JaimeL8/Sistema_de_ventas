@@ -1,59 +1,70 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sistema de Ventas e Inventario (ERP)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este es un sistema de gestión de ventas, productos, clientes y empleados desarrollado en Laravel. Incluye el consumo de la API del Banco de México (Banxico) para consultar el tipo de cambio en tiempo real.
 
-## About Laravel
+## Requisitos Previos
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Para poder ejecutar este proyecto localmente, necesitas tener instalado:
+* [XAMPP](https://www.apachefriends.org/es/index.html) (con PHP 8.2 o superior y MySQL).
+* [Composer](https://getcomposer.org/) (Gestor de dependencias de PHP).
+* [Git](https://git-scm.com/)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Instrucciones de Instalación e Inicialización
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Sigue estos pasos cuidadosamente para levantar el proyecto en tu entorno local:
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+ 1. Clonar el repositorio
+Abre tu terminal y ejecuta el siguiente comando para descargar el proyecto:
+```bash
+ $ git clone https://github.com/JaimeL8/Sistema_de_ventas
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+2. Instalar las dependencias
+Como la carpeta vendor no se sube a GitHub por su peso, debes instalar las librerías de Laravel ejecutando:
 
-## Laravel Sponsors
+$ composer install
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+3. Configurar el archivo de entorno (.env)
+El archivo .env contiene credenciales sensibles y no se incluye en el repositorio. Debes crear una copia del archivo de ejemplo:
 
-### Premium Partners
+Copia el archivo .env.example y renómbralo a .env.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+(O ejecuta en consola: cp .env.example .env).
 
-## Contributing
+4. Generar la clave de la aplicación
+Ejecuta el siguiente comando para generar la llave de seguridad de Laravel:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Bash
+$ php artisan key:generate
 
-## Code of Conduct
+5. Configurar la Base de Datos
+Abre XAMPP e inicia los servicios de Apache y MySQL.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Entra a http://localhost/phpmyadmin y crea una base de datos vacía llamada sistema_ventas.
 
-## Security Vulnerabilities
+Abre el archivo .env de tu proyecto y asegúrate de que la conexión a la base de datos esté así:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Fragmento de código: 
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=sistema_ventas
+DB_USERNAME=root
+DB_PASSWORD=
 
-## License
+6. Configurar la API de Banxico
+En el mismo archivo .env (o directamente en app/Http/Controllers/HomeController.php), asegúrate de colocar un token válido generado desde el portal de desarrolladores de Banxico para que el módulo del Home Page funcione correctamente.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+7. Ejecutar las Migraciones
+Para construir todas las tablas de la base de datos (clientes, empleados, productos, ventas y detalles), ejecuta:
+
+$ php artisan migrate
+
+8. Iniciar el Servidor Local
+Finalmente, levanta el servidor de desarrollo de Laravel con:
+
+$ php artisan serve
+
+Abre tu navegador y visita: http://127.0.0.1:8000
+
+
