@@ -18,7 +18,7 @@ class Venta extends Model
         return $this->belongsTo(Empleado::class, 'id_empleado');
     }
 
-    // Relación con los Detalles (Productos agregados)
+    // Relacion con los Detalles (Productos agregados)
     public function detalles() {
         return $this->hasMany(VentaDetalle::class, 'id_venta');
     }

@@ -53,7 +53,7 @@
                     <td>{{ $cliente->usuario ?? 'N/A' }}</td>
                     <td>{{ $cliente->fecha_nacimiento ?? 'N/A' }}</td>
                     <td>
-                        <!-- Botón Cambio (Le pasamos los 7 parámetros) -->
+                        <!-- Botón Cambio  -->
                         <button class="btn btn-sm btn-warning" onclick="abrirModalEditar({{ $cliente->id }}, '{{ $cliente->nombre }}', '{{ $cliente->apellido }}', '{{ $cliente->direccion }}', '{{ $cliente->email }}', '{{ $cliente->usuario }}', '{{ $cliente->fecha_nacimiento }}')">Editar</button>
                         
                         <!-- Botón Baja -->
